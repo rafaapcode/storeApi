@@ -25,15 +25,15 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      faturamento_mes: {
+      monthly_billing: {
         type: Sequelize.FLOAT,
         allowNull: true,
       },
-      comissao: {
+      fee: {
         type: Sequelize.FLOAT,
         allowNull: false,
       },
-      cargo: {
+      position: {
         type: Sequelize.STRING,
         allowNull: false,
       },
