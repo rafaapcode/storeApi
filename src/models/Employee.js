@@ -1,6 +1,5 @@
 import Sequelize, { Model } from 'sequelize';
 import bcryptjs from 'bcryptjs';
-import { isValid as checkCpf } from '@fnando/cpf';
 
 export default class Employee extends Model {
   static init(sequelize) {
@@ -31,15 +30,11 @@ export default class Employee extends Model {
         type: Sequelize.VIRTUAL,
         defaultValue: '',
         validate: {
-          is: {
-            args: [/^(?=.*[a-z])(?=.*[A-Z](?=.*[0-9])(?=.*[!@#$%&*/~]).{8,})$/g],
-            msg: 'Weak password, put a stronger password',
+          len: {
+            args: [8, 255],
+            msg: 'Password must be at least 8 characters',
           },
         },
-      },
-      password_hash: {
-        type: Sequelize.STRING,
-        defaultValue: '',
       },
       cpf: {
         type: Sequelize.STRING,
@@ -48,10 +43,9 @@ export default class Employee extends Model {
           msg: 'CPF already exists.',
         },
         validate: {
-          checkCpf(value) {
-            if (!checkCpf(value)) {
-              throw new Error('CPF invalid.');
-            }
+          len: {
+            args: [11, 15],
+            msg: 'CPF invalid',
           },
         },
       },
@@ -68,10 +62,14 @@ export default class Employee extends Model {
         defaultValue: '',
         validate: {
           len: {
-            args: [7, 20],
+            args: [6, 20],
             msg: 'The possition must be a SELLER or MANAGER.',
           },
         },
+      },
+      password_hash: {
+        type: Sequelize.STRING,
+        defaultValue: '',
       },
     }, {
       sequelize,
@@ -81,9 +79,12 @@ export default class Employee extends Model {
       if (employee.password) {
         employee.password_hash = await bcryptjs.hash(employee.password, 8);
       }
-
-      employee.fee = employee.billing_month * 0.05;
+      employee.fee = employee.monthly_billing * 0.05;
     });
     return this;
+  }
+
+  static checkPassword(password) {
+    return bcryptjs.compare(password, this.password_hash);
   }
 }

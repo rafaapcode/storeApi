@@ -31,7 +31,7 @@ module.exports = {
       },
       fee: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: true,
       },
       position: {
         type: Sequelize.STRING,

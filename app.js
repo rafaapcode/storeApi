@@ -4,7 +4,9 @@ dotenv.config();
 
 import './src/database';
 import express from 'express';
+
 import employeeRoute from './src/routes/employeeRoute';
+import tokenRoute from './src/routes/tokenRoute';
 
 class App {
   constructor() {
@@ -20,6 +22,7 @@ class App {
 
   routes() {
     this.app.use('/employees?', employeeRoute);
+    this.app.use('/token', tokenRoute);
   }
 }
 
