@@ -84,7 +84,7 @@ export default class Employee extends Model {
     return this;
   }
 
-  static checkPassword(password) {
+  checkPassword(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
 }

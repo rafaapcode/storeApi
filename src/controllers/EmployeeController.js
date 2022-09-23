@@ -4,7 +4,7 @@ class EmployeeController {
   async index(req, res) {
     try {
       const allEmployees = await Employee.findAll({
-        attributes: ['id', 'name', 'email', 'cpf', 'monthly_billing', 'fee', 'position'],
+        attributes: ['id', 'name', 'email', 'monthly_billing', 'fee', 'position'],
         order: [['id', 'DESC']],
       });
 
@@ -23,7 +23,7 @@ class EmployeeController {
       }
 
       const employee = await Employee.findByPk(id, {
-        attributes: ['id', 'name', 'email', 'cpf', 'monthly_billing', 'fee', 'position'],
+        attributes: ['id', 'name', 'email', 'monthly_billing', 'fee', 'position'],
         order: [['id', 'DESC']],
       });
 
@@ -90,9 +90,7 @@ class EmployeeController {
       await employee.destroy();
       return res.json({ removed: true });
     } catch (e) {
-      return res.status(400).json({
-        errors: e.errors.map(err => err.message),
-      });
+      return { errors: e.errors.map(err => err.message) };
     }
   }
 }
