@@ -1,11 +1,16 @@
 import Employee from '../models/Employee';
+import Photo from '../models/Photo.js';
 
 class EmployeeController {
   async index(req, res) {
     try {
       const allEmployees = await Employee.findAll({
         attributes: ['id', 'name', 'email', 'monthly_billing', 'fee', 'position'],
-        order: [['id', 'DESC']],
+        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+        include: {
+          model: Photo,
+          attributes: ['url', 'filename'],
+        },
       });
 
       return res.json(allEmployees);
@@ -24,7 +29,11 @@ class EmployeeController {
 
       const employee = await Employee.findByPk(id, {
         attributes: ['id', 'name', 'email', 'monthly_billing', 'fee', 'position'],
-        order: [['id', 'DESC']],
+        order: [['id', 'DESC'], [Photo, 'id', 'DESC']],
+        include: {
+          model: Photo,
+          attributes: ['url', 'filename'],
+        },
       });
 
       if (!employee) {

@@ -87,4 +87,8 @@ export default class Employee extends Model {
   checkPassword(password) {
     return bcryptjs.compare(password, this.password_hash);
   }
+
+  static associate(models) {
+    this.hasMany(models.Photo, { foreignKey: 'employee_id' });
+  }
 }
