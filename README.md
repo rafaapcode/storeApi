@@ -30,3 +30,8 @@
   - Criação e configuração de Chave Estrangeira.
   - Upload de Imagem (MULTER).
   - Utilização da função HASH para armazenar a senha no Banco de Dados (bcryptjs).
+
+- Neste projeto coloquei em prática a Arquitetura MVC, apesar de não ter usado as VIEWS, aprendi na prática como essa arquitetura funciona, separando totalmente os MODELS e os CONTROLLERS.
+  - Models -> Onde é feita a comunicação com o Banco de dados.
+  - Controllers -> Onde se encontra a lógica das nossas rotas.
+
