@@ -52,8 +52,9 @@ class EmployeeController {
 
       return res.json(createEmployee);
     } catch (e) {
-      return res.status(400).json({
-        errors: e.errors.map(err => err.message),
+      return res.status(500).json({
+        errors: ['We cant create a employee.'],
+        possibleErrors: ['Email/Password invalid or already exists.', 'CPF invalid or already exists.'],
       });
     }
   }
@@ -76,8 +77,9 @@ class EmployeeController {
       const newEmployee = await employee.update({ ...req.body, cpf });
       return res.json(newEmployee);
     } catch (e) {
-      return res.status(400).json({
-        errors: e.errors.map(err => err.message),
+      return res.status(500).json({
+        errors: 'We cant update a employee.',
+        possibleErrors: ['Email/Password invalid or already exists.', 'CPF invalid or already exists.'],
       });
     }
   }
@@ -99,7 +101,9 @@ class EmployeeController {
       await employee.destroy();
       return res.json({ removed: true });
     } catch (e) {
-      return { errors: e.errors.map(err => err.message) };
+      return res.status(500).json({
+        errors: 'We cant delete a employee.',
+      });
     }
   }
 }

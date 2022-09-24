@@ -19,7 +19,7 @@ class PhotoController {
         return res.json(photo);
       } catch (e) {
         return res.status(400).json({
-          errors: ['Alumn not exist'],
+          errors: ['Employee not exist'],
         });
       }
     });
