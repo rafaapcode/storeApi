@@ -8,7 +8,7 @@ const employeeRoute = new Router();
 
 employeeRoute.get('/', EmployeeController.index);
 employeeRoute.get('/:id', EmployeeController.show);
-employeeRoute.post('/', verifyToken, checkManager, checkCPF, EmployeeController.storage);
+employeeRoute.post('/', checkCPF, EmployeeController.storage);
 employeeRoute.put('/:id?', verifyToken, EmployeeController.update);
 employeeRoute.delete('/:id?', verifyToken, checkManager, EmployeeController.delete);
 

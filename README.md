@@ -19,7 +19,7 @@
 - [x] Criar TOKEN para autenticação.
 - [x] Exigir o TOKEN para a CRIAÇÃO/ATUALIZAÇÃO/DELEÇÃO.
 - [x] Validar o CPF passado no momento da criação.
-- [x] Permitir a CRIAÇÃO e DELEÇÃO de funcionários, somente para os GERENTES.
+- [x] Permitir a DELEÇÃO de funcionários, somente para os GERENTES.
 
 #### Aprendizado
 
